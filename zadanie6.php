@@ -9,7 +9,6 @@ class trapezoid{
 	private $dot3_2;
 	private $dot4_1;
 	private $dot4_2;
-	private $averageArea;
 
 	public function getDot1_1(){
 		return $this->dot1_1;
@@ -83,22 +82,6 @@ class trapezoid{
 		$this->averageArea = $averageArea;
 	}
 
-	public function numberOfTrapezoids(){
-		if ($this->square() > $this->averageArea()) {
-			$this->examination();
-		}
-	}
-
-	public function averageArea(){
-		return $this->averageArea()/5;
-	}
-
-	public function sumSquare(){ //сумма площадей
-		$sum = $this->getAverageArea();
-		$sum += $this->square();
-		$this->setAverageArea($sum);
-	}
-
 	private function examination(){  //проверки
 		if ($this->equilateralTrapezoid()) {
 			echo 'Трапеция является равнобедренной<br>';
@@ -116,7 +99,7 @@ class trapezoid{
 	}
 
 
-	private function square(){
+	public function square(){
 		$semiperimeter = $this->perimeter()/2;
 		return (($this->vectorLength()[3]+$this->vectorLength()[1])/(abs($this->vectorLength()[3]-$this->vectorLength()[1])))*(sqrt(($semiperimeter-$this->vectorLength()[3])*($semiperimeter-$this->vectorLength()[1])*($semiperimeter-$this->vectorLength()[3]-$this->vectorLength()[0])*($semiperimeter-$this->vectorLength()[3]-$this->vectorLength()[2]))); 
 	}
@@ -283,7 +266,6 @@ class trapezoid{
 		$this->dot4_2 = $dot4_2;
 		if ($this->correlationСheck()) {
 			$this->examination();
-			$this->sumSquare();
 		}
 		else{
 			echo "Набор точек не является трапецией";
@@ -305,5 +287,15 @@ $trapezoid2 = new Trapezoid(2,4,0,2,0,7,2,5);
 $trapezoid3 = new Trapezoid(-2,1,-6,5,-3,5,-3,1);
 $trapezoid4 = new Trapezoid(-4,0,2,1,3,-1,-1.4,-5.2);
 $trapezoid5 = new Trapezoid(0,5,-2,4,4,2,3,4);
-$trapezoid->averageArea();
+$sum = $trapezoid->square()+$trapezoid2->square()+$trapezoid3->square()+$trapezoid4->square()+$trapezoid5->square();
+;
+$averageArea = $sum/5;
+$check = 0;
+$listTrapezoid = [$trapezoid,$trapezoid2,$trapezoid3,$trapezoid4,$trapezoid5];
+foreach ($listTrapezoid as $trapez){
+	if ($trapez->square()>$averageArea) {
+		$check++;
+	}
+}
+echo 'Количество трапеций, у которых площадь больше средней площади: '.$check;
 ?>
