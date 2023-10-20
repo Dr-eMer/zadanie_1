@@ -99,12 +99,12 @@ class trapezoid{
 	}
 
 
-	public function square(){
+	public function square(){ //площадь
 		$semiperimeter = $this->perimeter()/2;
 		return (($this->vectorLength()[3]+$this->vectorLength()[1])/(abs($this->vectorLength()[3]-$this->vectorLength()[1])))*(sqrt(($semiperimeter-$this->vectorLength()[3])*($semiperimeter-$this->vectorLength()[1])*($semiperimeter-$this->vectorLength()[3]-$this->vectorLength()[0])*($semiperimeter-$this->vectorLength()[3]-$this->vectorLength()[2]))); 
 	}
 
-	private function perimeter(){
+	private function perimeter(){ //периметр
 		$p = 0;
 		$i = 0;
 		while ($i<4) {
